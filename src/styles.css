@@ -1,0 +1,120 @@
+/* Recursive Board Dashboard. Every class starts with wi-dash, so it cannot clash with Recursive Board. */
+
+
+.wi-dash { padding: var(--size-4-5) var(--size-4-6); font-size: var(--font-ui-small); }
+.wi-dash-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--size-4-3); margin-bottom: var(--size-4-4); }
+.wi-dash-head h1 { margin: 0; font-size: var(--h2-size); }
+.wi-dash-head-right { display: flex; flex-wrap: wrap; gap: var(--size-4-3); align-items: center; }
+.wi-dash-open-board { display: inline-flex; align-items: center; gap: var(--size-4-2); }
+.wi-dash-muted { color: var(--text-muted); font-size: var(--font-ui-smaller); }
+.wi-dash-lower { display: grid; grid-template-columns: 3fr 2fr; gap: var(--size-4-3); align-items: start; }
+@media (max-width: 1100px) { .wi-dash-lower { grid-template-columns: minmax(0, 1fr); } }
+.wi-dash-panel { background: var(--background-secondary); border: 1px solid var(--background-modifier-border); border-radius: var(--radius-l); padding: var(--size-4-3); min-width: 0; overflow-x: auto; }
+.wi-dash-panel-head { display: flex; align-items: center; gap: var(--size-4-2); }
+.wi-dash-title { font-weight: var(--font-semibold); font-size: var(--font-ui-medium); }
+.wi-dash-count { background: var(--background-modifier-hover); border-radius: var(--radius-l); padding: 0 var(--size-4-2); font-size: var(--font-ui-smaller); }
+.wi-dash-icon { display: inline-flex; color: var(--text-muted); }
+.wi-dash-icon svg { width: var(--icon-s); height: var(--icon-s); }
+/* A filled button sets its own text colour, so the icon takes it in every theme. */
+.wi-dash-open-board .wi-dash-icon { color: inherit; }
+/* Obsidian's mobile buttons are tall pills; on the head they would tower over the title. */
+.is-mobile .wi-dash-open-board { height: auto; padding: var(--size-4-1) var(--size-4-3); font-size: var(--font-ui-small); }
+.wi-dash-table { width: 100%; border-collapse: collapse; margin-top: var(--size-4-2); }
+.wi-dash-table th { text-align: left; font-size: var(--font-ui-smaller); text-transform: uppercase; letter-spacing: .04em; color: var(--text-faint); padding: var(--size-4-1) var(--size-4-2); border-bottom: 1px solid var(--background-modifier-border); }
+.wi-dash-table td { padding: var(--size-4-2); border-bottom: 1px solid var(--background-modifier-border); vertical-align: top; }
+/* A tick fades the file's own cells. The card and the verdict buttons belong to the whole card, so they stay. */
+.wi-dash-table tr.is-ticked td:not(:first-child, .wi-dash-desktop-card, .wi-dash-phone-card, .wi-dash-check) { opacity: .55; }
+.wi-dash-name { display: inline-flex; gap: var(--size-4-2); align-items: center; }
+.wi-dash-nowrap { white-space: nowrap; }
+.wi-dash-check { max-width: 320px; }
+.wi-dash-names { display: flex; flex-wrap: wrap; gap: var(--size-4-2); margin-top: var(--size-4-2); }
+.wi-dash-verdict { display: flex; flex-wrap: wrap; gap: var(--size-4-2); margin-top: var(--size-4-2); }
+.wi-dash-verdict.wi-dash-hidden { display: none; }
+.wi-dash-send-back-comment { width: 100%; resize: vertical; margin-top: var(--size-4-2); }
+.wi-dash-group td { cursor: pointer; font-weight: var(--font-semibold); padding-top: var(--size-4-3); }
+.wi-dash-group .wi-dash-count { margin-left: var(--size-4-2); }
+.wi-dash-caret { display: inline-flex; vertical-align: middle; margin-right: var(--size-4-1); }
+.wi-dash-hidden { display: none; }
+.wi-dash-projects { display: flex; flex-direction: column; gap: var(--size-4-2); margin: var(--size-4-2) 0 var(--size-4-1); }
+.wi-dash-project { display: flex; align-items: stretch; gap: var(--size-4-1); cursor: pointer; padding-left: var(--size-4-2); border-radius: var(--radius-m); }
+.wi-dash-project-main { flex: 1; min-width: 0; padding: var(--size-4-1) 0; }
+/* The full row height is the tap area, so the icon is easy to hit on a phone. */
+.wi-dash-project-open { display: flex; align-self: stretch; height: auto; min-width: 40px; justify-content: center; padding: 0 var(--size-4-2); }
+/* The same size as the board icon in Progress. */
+.wi-dash-copy { flex: none; align-self: center; }
+button.wi-dash-id.wi-dash-id { display: inline-flex; align-items: center; gap: var(--size-4-1); height: auto; padding: 0 var(--size-4-1); background: none; box-shadow: none; color: var(--text-faint); font-family: var(--font-monospace); font-size: var(--font-ui-smaller); cursor: pointer; }
+button.wi-dash-id.wi-dash-id:hover { color: var(--text-normal); background: var(--background-modifier-hover); }
+.wi-dash-id .wi-dash-icon svg { width: var(--icon-xs); height: var(--icon-xs); }
+.wi-dash-desktop-card button.wi-dash-id.wi-dash-id, .wi-dash-phone-card button.wi-dash-id.wi-dash-id { display: flex; width: fit-content; margin-top: var(--size-4-1); margin-left: calc(-1 * var(--size-4-1)); font-weight: normal; }
+.wi-dash-badge { display: inline-flex; align-items: center; gap: var(--size-2-1); margin-left: var(--size-4-1); font-weight: var(--font-normal); font-size: var(--font-ui-smaller); color: var(--interactive-accent); }
+.wi-dash-badge .wi-dash-icon { color: inherit; }
+.wi-dash-badge .wi-dash-icon svg { width: var(--icon-xs); height: var(--icon-xs); }
+.wi-dash-project:hover { background: var(--background-modifier-hover); }
+.wi-dash-project-head { display: flex; justify-content: space-between; gap: var(--size-4-2); align-items: baseline; }
+.wi-dash-project-name { font-weight: var(--font-semibold); }
+.wi-dash-bar { height: 8px; background: var(--background-modifier-hover); border-radius: 4px; margin-top: var(--size-4-1); overflow: hidden; }
+.wi-dash-bar-fill { height: 100%; background: var(--color-green); }
+.wi-dash-agents-head { margin-top: var(--size-4-4); }
+.wi-dash-group-name { font-weight: var(--font-semibold); }
+.wi-dash-empty { margin-top: var(--size-4-1); }
+.wi-dash-agents { display: flex; flex-direction: column; gap: var(--size-2-1); }
+.wi-dash-agent { display: flex; gap: var(--size-4-2); align-items: flex-start; padding: var(--size-4-1) var(--size-4-2); border-radius: var(--radius-m); }
+.wi-dash-agent-body { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.wi-dash-agent-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--size-2-1) var(--size-4-2); }
+.wi-dash-chip { background: var(--background-modifier-hover); border-radius: var(--radius-s); padding: 0 var(--size-4-1); }
+.wi-dash-agent.is-working .wi-dash-icon { color: var(--interactive-accent); }
+.wi-dash-agent.is-quiet .wi-dash-icon { color: var(--color-orange); }
+.wi-dash-agent.is-finished .wi-dash-icon { color: var(--color-green); }
+.wi-dash-agent.is-waiting .wi-dash-icon { color: var(--text-muted); }
+.wi-dash-ago { font-size: var(--font-ui-smaller); color: var(--text-faint); flex: none; align-self: center; }
+.wi-dash-fold { margin-top: var(--size-4-2); }
+.wi-dash-fold .wi-dash-agents.wi-dash-hidden { display: none; }
+.wi-dash-fold-toggle { display: inline-flex; align-items: center; gap: var(--size-4-1); padding: var(--size-4-1) var(--size-4-2); height: auto; background: none; box-shadow: none; color: var(--text-muted); font-size: var(--font-ui-smaller); }
+.wi-dash-fold-toggle:hover { color: var(--text-normal); background: var(--background-modifier-hover); }
+.wi-dash-agent.is-working > .wi-dash-icon svg, .wi-dash-badge .wi-dash-icon svg { animation: wi-dash-spin 1.6s linear infinite; }
+@keyframes wi-dash-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .wi-dash-agent.is-working > .wi-dash-icon svg, .wi-dash-badge .wi-dash-icon svg { animation: none; } }
+.wi-dash-trail { display: flex; flex-wrap: wrap; align-items: center; gap: var(--size-4-1); margin: calc(-1 * var(--size-4-2)) 0 var(--size-4-3); }
+.wi-dash-trail-here { font-weight: var(--font-semibold); }
+.wi-dash-project-name { display: inline-flex; align-items: center; gap: var(--size-4-1); min-width: 0; overflow-wrap: anywhere; }
+.wi-dash-project:not(.is-area) { cursor: default; }
+.wi-dash-project-spacer { visibility: hidden; }
+.wi-dash-project:not(.is-area):hover { background: none; }
+.wi-dash-back { margin-left: auto; display: inline-flex; align-items: center; gap: var(--size-4-1); font-size: var(--font-ui-small); }
+
+/* Keep each review target and its context together on phones. */
+.wi-dash-phone-card, .wi-dash-phone-check { display: none; }
+@media (max-width: 600px) {
+  .wi-dash, .wi-dash-lower, .wi-dash-column, .wi-dash-panel { min-width: 0; max-width: 100%; }
+  .wi-dash { padding: var(--size-4-3); }
+  .wi-dash-panel { overflow-x: visible; }
+  .wi-dash-table { display: block; width: 100%; }
+  .wi-dash-table thead { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .wi-dash-table tbody { display: grid; gap: var(--size-4-2); min-width: 0; }
+  .wi-dash-table tr.wi-dash-review-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-width: 0; border: 1px solid var(--background-modifier-border); border-radius: var(--radius-m); background: var(--background-primary); }
+  .wi-dash-table tr.wi-dash-review-row.is-ticked td:not(:first-child, .wi-dash-desktop-card, .wi-dash-phone-card, .wi-dash-check) { opacity: .75; }
+  .wi-dash-table tr.wi-dash-review-row > td { display: block; min-width: 0; padding: var(--size-4-2); border: 0; }
+  .wi-dash-review-tick { grid-column: 1; grid-row: 1; }
+  .wi-dash-review-target { grid-column: 2; grid-row: 1; }
+  .wi-dash-phone-card, .wi-dash-phone-check { display: block !important; grid-column: 1 / -1; }
+  .wi-dash-phone-card { grid-row: 2; font-weight: var(--font-semibold); }
+  .wi-dash-phone-check { grid-row: 3; }
+  .wi-dash-review-type { grid-column: 1; grid-row: 4; }
+  .wi-dash-review-date { grid-column: 2; grid-row: 4; white-space: normal; }
+  .wi-dash-desktop-card, .wi-dash-desktop-check { display: none !important; }
+  .wi-dash-table td[data-label]::before { display: block; margin-bottom: var(--size-2-1); color: var(--text-faint); font-size: var(--font-ui-smaller); font-weight: var(--font-normal); }
+  .wi-dash-table td[data-label]::before { content: attr(data-label); }
+  .wi-dash-table tr.wi-dash-group { display: block; }
+  .wi-dash-table tr.wi-dash-group td { display: block; width: 100%; padding: var(--size-4-2) 0 0; border: 0; }
+  .wi-dash-name { min-width: 0; align-items: flex-start; overflow-wrap: anywhere; }
+  .wi-dash-name a, .wi-dash-phone-card a { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+  .wi-dash-check, .wi-dash-check > div { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+  .wi-dash-verdict button { white-space: normal; }
+}
+
+.wi-dash-column { display: flex; flex-direction: column; gap: var(--size-4-3); min-width: 0; }
+.wi-dash-panel-head.is-attention .wi-dash-icon { color: var(--color-orange); }
+.wi-dash-panel-head + .wi-dash-agents { margin-top: var(--size-4-2); }
+.wi-dash-people-fold { margin-top: var(--size-4-2); }
+.wi-dash-people-fold > summary { cursor: pointer; color: var(--text-muted); font-size: var(--font-ui-smaller); }
+.wi-dash-person h3 { margin: var(--size-4-3) 0 var(--size-4-1); font-size: var(--font-ui-small); }

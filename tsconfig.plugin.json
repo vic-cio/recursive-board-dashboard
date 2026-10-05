@@ -1,0 +1,10 @@
+{
+  "//": "The plugin must load on iOS, so this project has no @types/node: a `node:` import or a reference to `process` cannot typecheck. See also build/forbidden-imports.mjs.",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "types": []
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/*.test.ts"]
+}

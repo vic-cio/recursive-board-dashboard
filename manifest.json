@@ -1,0 +1,9 @@
+{
+  "id": "recursive-board-dashboard",
+  "name": "Recursive Board Dashboard",
+  "version": "0.1.0",
+  "minAppVersion": "1.13.4",
+  "description": "An example dashboard over every Recursive Board in a vault: review, progress, agents, people and attention.",
+  "author": "vic-cio",
+  "isDesktopOnly": false
+}

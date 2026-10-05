@@ -1,0 +1,25 @@
+{
+  "name": "recursive-board-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "An example Obsidian dashboard for Recursive Board, to copy and change",
+  "author": "vic-cio",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "test": "npm run typecheck && node --test 'src/**/*.test.ts'",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.plugin.json",
+    "build": "node build/plugin.mjs",
+    "dev": "node build/plugin.mjs --watch",
+    "install:vault": "node build/install.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "esbuild": "^0.28.2",
+    "obsidian": "^1.13.1",
+    "typescript": "^5.9.3"
+  }
+}
